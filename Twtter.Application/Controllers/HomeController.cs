@@ -25,14 +25,8 @@ namespace Twtter.Application.Controllers
         }
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult Jazastry()
-        {
-
-            var login = new LoginViewModel { Email = "afjkbha@ksjd.com", Password = "swfkjwhqw", RememberMe = true};
-            return this.View(login);
+            var tweets = this.data.Tweets.All().Select(x=>x);
+            return View(tweets);
         }
 
         public ActionResult About()
