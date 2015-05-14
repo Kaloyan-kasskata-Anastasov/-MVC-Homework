@@ -21,6 +21,12 @@ namespace Twtter.Application.Controllers
         {
 
         }
+
+        public ActionResult Index(string username)
+        {
+            return this.View();
+        }
+
         // GET: User
         public ActionResult Profile(string username)
         {
