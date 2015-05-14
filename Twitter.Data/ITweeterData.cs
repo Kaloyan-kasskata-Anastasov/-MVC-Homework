@@ -13,6 +13,8 @@
 
         IRepository<Profile> Profiles { get; }
 
+        IRepository<FollowingFollower> Follows { get; } 
+
         int SaveChanges();
     }
 }

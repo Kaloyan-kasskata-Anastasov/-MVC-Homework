@@ -53,6 +53,13 @@ namespace Twitter.Data
             }
         }
 
+        public IRepository<FollowingFollower> Follows
+        {
+            get
+            {
+                return this.GetRepository<FollowingFollower>();
+            }
+        }
 
         public int SaveChanges()
         {

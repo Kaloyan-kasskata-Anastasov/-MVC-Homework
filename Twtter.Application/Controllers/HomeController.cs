@@ -30,7 +30,6 @@ namespace Twtter.Application.Controllers
 
         public ActionResult Jazastry()
         {
-
             var login = new LoginViewModel { Email = "afjkbha@ksjd.com", Password = "swfkjwhqw", RememberMe = true};
             return this.View(login);
         }

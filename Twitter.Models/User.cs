@@ -19,6 +19,8 @@
         {
             this.UserTweets = new HashSet<Tweet>();
             this.UserFavoriteTweets = new HashSet<Tweet>();
+            this.UserFollowers = new HashSet<User>();
+            this.FollowingUsers = new HashSet<User>();
         }
 
         public int ProfileId { get; set; }
@@ -28,5 +30,9 @@
         public virtual ICollection<Tweet> UserTweets { get; set; }
 
         public virtual ICollection<Tweet> UserFavoriteTweets { get; set; }
+
+        public virtual ICollection<User> UserFollowers { get; set; }
+
+        public virtual ICollection<User> FollowingUsers { get; set; }
     }
 }

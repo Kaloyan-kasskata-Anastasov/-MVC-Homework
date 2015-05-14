@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Twtter.Application.Controllers
 {
+    using Models;
     using Twitter.Data;
 
     public class UsersController : BaseController
@@ -24,7 +25,18 @@ namespace Twtter.Application.Controllers
 
         public ActionResult Index(string username)
         {
-            return this.View();
+            var followedTweets = this.Data.Tweets
+                .All()
+                .Select(x =>
+                    new TweetOutputModel
+                    {
+                        Id = x.Id,
+                        UserName = x.Author.UserName
+                    }
+                )
+                .ToList();
+
+            return this.View(followedTweets);
         }
 
         // GET: User

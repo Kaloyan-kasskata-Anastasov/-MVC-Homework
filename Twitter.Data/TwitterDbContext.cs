@@ -20,7 +20,10 @@
         public IDbSet<Tweet> Tweets { get; set; }
 
         public IDbSet<Profile> Profiles { get; set; }
+
         public IDbSet<Notification> Notifications { get; set; }
+
+        public IDbSet<FollowingFollower> Follows { get; set; } 
 
         public new IDbSet<T> Set<T>() where T : class
         {

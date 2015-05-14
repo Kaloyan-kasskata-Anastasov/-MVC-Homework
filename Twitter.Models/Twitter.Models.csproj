@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\NotificationType.cs" />
+    <Compile Include="Followers.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

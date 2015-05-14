@@ -13,7 +13,9 @@
 
         IDbSet<Notification> Notifications { get; set; }
 
-        IDbSet<Profile> Profiles { get; set; } 
+        IDbSet<Profile> Profiles { get; set; }
+
+        IDbSet<FollowingFollower> Follows { get; set; } 
 
         int SaveChanges();
 
