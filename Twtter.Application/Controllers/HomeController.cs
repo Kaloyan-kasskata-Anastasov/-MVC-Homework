@@ -28,12 +28,6 @@ namespace Twtter.Application.Controllers
             return View();
         }
 
-        public ActionResult Jazastry()
-        {
-            var login = new LoginViewModel { Email = "afjkbha@ksjd.com", Password = "swfkjwhqw", RememberMe = true};
-            return this.View(login);
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
