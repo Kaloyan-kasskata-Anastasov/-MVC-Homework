@@ -25,8 +25,6 @@ namespace Twtter.Application.Controllers
         }
         public ActionResult Index()
         {
-            var tweets = 
-            this.ViewBag.Id = id;
             return View();
         }
 
