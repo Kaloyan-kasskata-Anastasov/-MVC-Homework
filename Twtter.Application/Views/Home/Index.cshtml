@@ -1,5 +1,6 @@
 ﻿@model Twtter.Application.Models.TweetsListModel
 
+
 @{
     ViewBag.Title = "Home";
 }
@@ -11,7 +12,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-7">
         @foreach (var tweet in @Model.Tweets)
         {
             <span>@tweet.CreatedOn.ToString("dd-MM-yyyy")</span>
@@ -22,21 +23,24 @@
         }
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-5">
         <h3>New tweet</h3>
         @*//TODO: Post*@
-        <form action="" method="post">
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="name" value="Title" placeholder="Title"/>
-            </div>
-            <div>
-                <label for="text">Text:</label>
-                <textarea id="text" name="Text"></textarea>
-            </div>
-            <div>
-                <input type="submit" value="Send"/>
-            </div>
-        </form>
+        @using (Html.BeginForm("Create","Tweets"))
+        {
+            <form action="/Tweets/Create" method="post">
+                <div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="name" placeholder="Title"/>
+                </div>
+                <div>
+                    <label for="text">Text:</label>
+                    <textarea id="text" name="text" rows="10" cols="50"></textarea>
+                </div>
+                <div>
+                    <input type="submit" value="Send"/>
+                </div>
+            </form>
+        }
     </div>
 </div>
