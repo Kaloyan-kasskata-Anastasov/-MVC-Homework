@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Twtter.Application.Controllers
+namespace Twtter.Application.Views.Tweets
 {
-    public class TweetsController : Controller
+    public class TweetController : Controller
     {
-        // GET: Tweets
+        // GET: Tweet
         public ActionResult Index()
         {
             return View();

@@ -1,5 +1,7 @@
-﻿{  
-    ViewBag.Title = "Home Page";
+﻿@model Twtter.Application.Models.TweetsListModel
+
+@{
+    ViewBag.Title = "Home";
 }
 
 <h1>@ViewBag.Title</h1>
@@ -9,11 +11,32 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-       
+    <div class="col-md-9">
+        @foreach (var tweet in @Model.Tweets)
+        {
+            <span>@tweet.CreatedOn.ToString("dd-MM-yyyy")</span>
+            @Html.ActionLink(tweet.Title, string.Format("tweet/get/{0}", tweet.Id));
+            <p>By: @tweet.Author.UserName</p>
+            <h3>@(tweet.Title)</h3>
+            <p>@tweet.Text</p>
+        }
     </div>
-    
-    <div class="col-md-4">
-       
+
+    <div class="col-md-3">
+        <h3>New tweet</h3>
+        @*//TODO: Post*@
+        <form action="" method="post">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="name" value="Title" placeholder="Title"/>
+            </div>
+            <div>
+                <label for="text">Text:</label>
+                <textarea id="text" name="Text"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Send"/>
+            </div>
+        </form>
     </div>
 </div>

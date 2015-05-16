@@ -191,7 +191,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
-    <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,6 +201,7 @@
     <Compile Include="Models\TweetViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\TweetController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -259,15 +259,14 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Jazastry.cshtml" />
     <Content Include="Views\Users\Profile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <None Include="Views\Tweet\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Notifications\" />
-    <Folder Include="Views\Tweets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
