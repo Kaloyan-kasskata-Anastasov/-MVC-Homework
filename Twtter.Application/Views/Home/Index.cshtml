@@ -16,8 +16,8 @@
         @foreach (var tweet in @Model.Tweets)
         {
             <span>@tweet.CreatedOn.ToString("dd-MM-yyyy")</span>
-            @Html.ActionLink(tweet.Title, string.Format("tweet/get/{0}", tweet.Id));
-            <p>By: @tweet.Author.UserName</p>
+            <a href="@string.Format("tweet/get/{0}",tweet.Id)">@tweet.Title</a>
+            <p>By: @(tweet.Author != null ? tweet.Author.UserName : "Dont have.")</p>
             <h3>@(tweet.Title)</h3>
             <p>@tweet.Text</p>
         }

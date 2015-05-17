@@ -11,6 +11,8 @@ using Twitter.Models;
 
 namespace Twtter.Application.Controllers
 {
+    using Microsoft.AspNet.Identity;
+
     public class TweetsController : Controller
     {
         private TwitterDbContext db = new TwitterDbContext();
@@ -50,9 +52,9 @@ namespace Twtter.Application.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "title, text")] Tweet tweet)
         {
-            Console.WriteLine();
             if (ModelState.IsValid)
             {
+                tweet.AuthorId = User.Identity.GetUserId();
                 db.Tweets.Add(tweet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,7 +84,6 @@ namespace Twtter.Application.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Text,CreatedOn,Url,AuthorId")] Tweet tweet)
         {
             if (ModelState.IsValid)

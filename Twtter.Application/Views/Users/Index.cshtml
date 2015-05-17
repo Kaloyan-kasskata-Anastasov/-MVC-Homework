@@ -1,8 +1,18 @@
-﻿@model Twtter.Application.Models.TweetOutputModel
+﻿@model Twtter.Application.Models.TweetsListModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2></h2>
+<h2>My profile</h2>
 
+<div class="col-md-7">
+    @foreach (var tweet in @Model.Tweets)
+    {
+        <span>@tweet.CreatedOn.ToString("dd-MM-yyyy")</span>
+        <a href="@string.Format("tweet/get/{0}",tweet.Id)">@tweet.Title</a>
+        <p>By: @(tweet.Author != null ? tweet.Author.UserName : "Dont have.")</p>
+        <h3>@(tweet.Title)</h3>
+        <p>@tweet.Text</p>
+    }
+</div>

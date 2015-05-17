@@ -6,15 +6,19 @@ using System.Web.Mvc;
 
 namespace Twtter.Application.Controllers
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
     using Models;
     using Twitter.Data;
+    using Twitter.Models;
 
+    [Authorize(Roles = "user")]
     public class UsersController : BaseController
     {
         public UsersController()
             : this(new TwitterData(new TwitterDbContext()))
         {
-
         }
 
         public UsersController(ITwitterData data)
@@ -22,37 +26,30 @@ namespace Twtter.Application.Controllers
         {
 
         }
-
         public ActionResult Index(string username)
         {
-            var followedTweets = this.Data.Tweets
-                .All()
-                .Select(x =>
-                    new TweetOutputModel
-                    {
-                        Id = x.Id,
-                        UserName = x.Author.UserName
-                    }
-                )
+            var user = User.Identity.GetUserId();
+            var model = new TweetsListModel();
+
+            var tweets = this.Data.Tweets.All()
+                .Where(x => x.AuthorId == user).OrderByDescending(x => x.CreatedOn)
                 .ToList();
 
-            return this.View(followedTweets);
+            foreach (var tweet in tweets)
+            {
+                model.Tweets.Add(new Tweet
+                {
+                    Id = tweet.Id,
+                    Title = tweet.Title,
+                    Text = tweet.Text,
+                    Author = tweet.Author,
+                    CreatedOn = tweet.CreatedOn
+                });
+            }
+
+            return View(model);
         }
 
-        // GET: User
-        public ActionResult Profile(string username)
-        {
-            var user = this.Data.Users.All().Where(u => u.UserName == username).FirstOrDefault();
-            return this.View(user);
-        }
 
-        public ActionResult GetFile()
-        {
-            var pers = new { 
-                name = "Goshko",
-                age = 12
-            };
-            return Json(pers, JsonRequestBehavior.AllowGet);
-        }
     }
 }
