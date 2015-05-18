@@ -22,55 +22,37 @@ namespace Twitter.Data.Migrations
 
         protected override void Seed(Twitter.Data.TwitterDbContext context)
         {
-            if (! context.Users.Any())
+            if (!context.Users.Any())
             {
-                User one = new User()
-                {
-                    UserName = "Gogo",
-                    Email = "main@main.com",
-                    PasswordHash = "770f31f6-3750-41c8-b512-652ad5f11814"
-                };
-                context.Users.Add(one);
-                User two = new User()
-                {
-                    UserName = "Mogo",
-                    Email = "main@main.com",
-                    PasswordHash = "770f31f6-3750-41c8-b512-652ad5f11814"
-                };
-                context.Users.Add(two);
-                User three = new User()
-                {
-                    UserName = "Vogo",
-                    Email = "main@main.com",
-                    PasswordHash = "770f31f6-3750-41c8-b512-652ad5f11814"
-                };
-                context.Users.Add(three);
-                Tweet twOne = new Tweet()
-                {
-                    Author = one,
-                    Text = "First tweet text",
-                    Title = "Tweet One",
-                };
-                context.Tweets.Add(twOne);
-                Tweet twTwo = new Tweet()
-                {
-                    Author = two,
-                    Text = "Second tweet text",
-                    Title = "Tweet Two",
-                };
-                context.Tweets.Add(twTwo);
-                FollowingFollower folowOne = new FollowingFollower()
-                {
-                    Author = one,
-                    Follower = two
-                };
-                
-                FollowingFollower folowTwo = new FollowingFollower()
-                {
-                    Author = one,
-                    Follower = three
-                };
+                AddRolesToDb(context);
             }
+        }
+        private void AddRolesToDb(TwitterDbContext context)
+        {
+            var storeRole = new RoleStore<IdentityRole>(context);
+            var managerRole = new RoleManager<IdentityRole>(storeRole);
+            var adminRole = new IdentityRole { Name = "admin" };
+            var userRole = new IdentityRole { Name = "user" };
+            var moderatorRole = new IdentityRole { Name = "moderator" };
+            managerRole.Create(adminRole);
+            managerRole.Create(userRole);
+            managerRole.Create(moderatorRole);
+
+            var storeUser = new UserStore<User>(context);
+            var managerUser = new UserManager<User>(storeUser);
+
+            var admin = new User { UserName = "admin@admin.a", Email = "admin@admin.a" };
+            var moderator = new User { UserName = "moderator@mod.m", Email = "moderator@mod.m" };
+            var resultUser = managerUser.Create(admin, "Aa#123456");
+            var resultmod = managerUser.Create(moderator, "Aa#123456");
+            context.SaveChanges();
+
+            var adminResult = context.Users.FirstOrDefault(x => x.UserName == "admin@admin.a");
+            var moderatorResult = context.Users.FirstOrDefault(x => x.UserName == "moderator@mod.m");
+            managerUser.AddToRole(adminResult.Id, "admin");
+            managerUser.AddToRole(moderatorResult.Id, "moderator");
+            context.SaveChanges();
+
         }
     }
 }
